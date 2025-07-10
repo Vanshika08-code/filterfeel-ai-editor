@@ -134,6 +134,36 @@ if "results" not in st.session_state:
         with col2:
             st.subheader(f"🎨 Filtered Image ({results['filter_choice']})")
             st.image(results["filtered_image"], use_column_width=True)
+            # 🌟 Mood Quote Mapping
+def get_mood_quote(mood):
+    mood = mood.lower()
+    if "happy" in mood:
+        return "“Happiness is contagious.”"
+    elif "sad" in mood:
+        return "“It’s okay to not be okay.”"
+    elif "angry" in mood:
+        return "“Speak when you are calm, not when you are angry.”"
+    elif "calm" in mood or "relax" in mood:
+        return "“In the calm is the clarity.”"
+    elif "excite" in mood:
+        return "“Let your excitement lead the way.”"
+    elif "love" in mood:
+        return "“Where there is love, there is life.”"
+    elif "sleep" in mood:
+        return "“Even the moon needs rest.”"
+    elif "peace" in mood or "serene" in mood:
+        return "“Peace begins with a smile.”"
+    elif "stress" in mood:
+        return "“Breathe. You’ve got this.”"
+    elif "focus" in mood:
+        return "“Focus on the step in front of you, not the whole staircase.”"
+    else:
+        return "“Every mood tells a story.”"
+
+# ✨ Display quote
+quote = get_mood_quote(user_mood)
+st.markdown(f"<div style='padding: 1em; background-color: #f9f9f9; border-left: 5px solid #ccc; font-style: italic;'>{quote}</div>", unsafe_allow_html=True)
+
             st.markdown("### ⬇️ Download")
             buf = io.BytesIO()
             results["filtered_image"].save(buf, format="PNG")
