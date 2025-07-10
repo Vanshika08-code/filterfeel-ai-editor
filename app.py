@@ -27,6 +27,32 @@ else:
         if selected_mood == "✍️ Enter your own":
             custom_mood = st.text_input("Enter your custom mood:")
         user_mood = custom_mood if selected_mood == "✍️ Enter your own" else selected_mood
+        # 🎨 Mood-Based Background Color Setter
+def set_mood_background(mood):
+    mood = mood.lower()
+    if "happy" in mood:
+        color = "#FFF9C4"  # Yellowish
+    elif "sad" in mood:
+        color = "#BBDEFB"  # Blue shades
+    elif "angry" in mood:
+        color = "#FFCDD2"  # Reddish
+    elif "calm" in mood or "relax" in mood:
+        color = "#C8E6C9"  # Soft green
+    elif "excite" in mood:
+        color = "#FFD180"  # Orange-peach
+    else:
+        color = "#F5F5F5"  # Neutral gray
+
+    st.markdown(f"""
+        <style>
+        .stApp {{
+            background-color: {color};
+        }}
+        </style>
+    """, unsafe_allow_html=True)
+
+# Call the function to set background color
+set_mood_background(user_mood)
 
         uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
         filter_choice = st.radio("Choose a filter type:", ["Rule-Based", "GPT-Based"])
