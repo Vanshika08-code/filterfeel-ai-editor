@@ -165,23 +165,32 @@ quote = get_mood_quote(user_mood)
 st.markdown(f"<div style='padding: 1em; background-color: #f9f9f9; border-left: 5px solid #ccc; font-style: italic;'>{quote}</div>", unsafe_allow_html=True)
 st.markdown("### ⬇️ Download")
 buf = io.BytesIO()
-results["filtered_image"].save(buf, format="PNG")
-byte_im = buf.getvalue()
-st.download_button(
-    label="Download Filtered Image",
-    data=byte_im,
-    file_name="filtered_image.png",
-    mime="image/png")
+
+if results["filtered_image"]:
+    try:
+        results["filtered_image"].save(buf, format="PNG")
+        byte_im = buf.getvalue()
+        st.download_button(
+            label="Download Filtered Image",
+            data=byte_im,
+            file_name="filtered_image.png",
+            mime="image/png"
+        )
+    except Exception as e:
+        st.warning(f"⚠️ Could not prepare image for download. Error: {e}")
+else:
+    st.warning("⚠️ Filtered image not available. Try again with a different mood or image.")
 st.markdown("---")
 col3, col4 = st.columns(2)
 with col3:
     if st.button("🔁 Try Again"):
         st.session_state["results"] = None
         st.stop()
-        with col4:
-            if st.button("🗑️ Clear Results"):
-                st.session_state["results"] = None
-                st.success("Results cleared! You can start fresh now.")
-                st.stop()
-            else:
-                st.info("Fill the input panel and submit to see results here.")
+
+with col4:
+    if st.button("🗑️ Clear Results"):
+        st.session_state["results"] = None
+        st.success("Results cleared! You can start fresh now.")
+        st.stop()
+    else:
+        st.info("Fill the input panel and submit to see results here.")
