@@ -58,8 +58,8 @@ filter_choice = st.radio("Choose a filter type:", ["Rule-Based", "GPT-Based"])
 submitted = st.form(key="mood_form").form_submit_button("✨ Get Mood Filter")
 
     # Store results in session state
-    if "results" not in st.session_state:
-        st.session_state["results"] = None
+if "results" not in st.session_state:
+    st.session_state["results"] = None
 
     # Submission handling
     if submitted:
@@ -96,7 +96,6 @@ submitted = st.form(key="mood_form").form_submit_button("✨ Get Mood Filter")
                         "image": image,
                         "filtered_image": filtered_image
                     }
-
                 except Exception as e:
                     st.error(f"Something went wrong during processing: {str(e)}")
                     st.stop()
