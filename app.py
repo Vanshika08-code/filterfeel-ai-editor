@@ -91,7 +91,12 @@ if "results" not in st.session_state:
                     if filter_choice == "Rule-Based":
                         applied_filter = get_filter_for_mood(user_mood)
                     else:
-                        applied_filter = gpt_based_mood_filter(user_mood)
+                        import re  # Make sure this is already at the top
+                        cleaned_mood = re.sub(r'[^\w\s]', '', user_mood).strip().lower()
+                        applied_filter = get_filter_for_mood(cleaned_mood)
+                        if not applied_filter:
+                            st.warning(f"No filter found for mood '{cleaned_mood}'. Try a different one.")
+                            st.stop()
 
                     # Other outputs
                     caption = generate_caption_for_mood(user_mood)
