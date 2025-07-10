@@ -164,6 +164,7 @@ def get_mood_quote(mood):
 quote = get_mood_quote(user_mood)
 st.markdown(f"<div style='padding: 1em; background-color: #f9f9f9; border-left: 5px solid #ccc; font-style: italic;'>{quote}</div>", unsafe_allow_html=True)
 st.markdown("### ⬇️ Download")
+results = st.session_state.get("results", None)
 buf = io.BytesIO()
 if results and results.get("filtered_image") is not None:
     try:
