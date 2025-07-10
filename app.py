@@ -171,7 +171,7 @@ st.download_button(
     label="Download Filtered Image",
     data=byte_im,
     file_name="filtered_image.png",
-    mime="image/png"
+    mime="image/png")
     st.markdown("---")
     col3, col4 = st.columns(2)
     with col3:
