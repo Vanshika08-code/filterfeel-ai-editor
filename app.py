@@ -165,8 +165,7 @@ quote = get_mood_quote(user_mood)
 st.markdown(f"<div style='padding: 1em; background-color: #f9f9f9; border-left: 5px solid #ccc; font-style: italic;'>{quote}</div>", unsafe_allow_html=True)
 st.markdown("### ⬇️ Download")
 buf = io.BytesIO()
-
-if results["filtered_image"]:
+if results and results.get("filtered_image") is not None:
     try:
         results["filtered_image"].save(buf, format="PNG")
         byte_im = buf.getvalue()
