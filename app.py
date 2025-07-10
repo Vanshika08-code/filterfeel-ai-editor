@@ -172,16 +172,16 @@ st.download_button(
     data=byte_im,
     file_name="filtered_image.png",
     mime="image/png")
-    st.markdown("---")
-    col3, col4 = st.columns(2)
-    with col3:
-        if st.button("🔁 Try Again"):
-            st.session_state["results"] = None
-            st.stop()
-            with col4:
-                if st.button("🗑️ Clear Results"):
-                    st.session_state["results"] = None
-                    st.success("Results cleared! You can start fresh now.")
-                    st.stop()
-                else:
-                    st.info("Fill the input panel and submit to see results here.")
+st.markdown("---")
+col3, col4 = st.columns(2)
+with col3:
+    if st.button("🔁 Try Again"):
+        st.session_state["results"] = None
+        st.stop()
+        with col4:
+            if st.button("🗑️ Clear Results"):
+                st.session_state["results"] = None
+                st.success("Results cleared! You can start fresh now.")
+                st.stop()
+            else:
+                st.info("Fill the input panel and submit to see results here.")
