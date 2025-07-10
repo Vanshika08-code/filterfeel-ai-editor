@@ -54,7 +54,22 @@ def set_mood_background(mood):
 # Call the function to set background color
 set_mood_background(user_mood)
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
-filter_choice = st.radio("Choose a filter type:", ["Rule-Based", "GPT-Based"])
+# 📌 Tooltip-enhanced filter choice
+st.markdown("**Choose a filter type:**")
+filter_choice = st.radio(
+    label="",
+    options=[
+        "🧠 GPT-Based – Uses AI creativity for unique filter",
+        "⚙️ Rule-Based – Predefined filters based on logic"
+    ]
+)
+
+# Clean the value for processing
+if "GPT" in filter_choice:
+    filter_choice = "GPT-Based"
+else:
+    filter_choice = "Rule-Based"
+
 submitted = st.form(key="mood_form").form_submit_button("✨ Get Mood Filter")
 
     # Store results in session state
